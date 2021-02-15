@@ -21,7 +21,7 @@ class Parametric extends Shape {
     this.frequency = 0.03;
     this.increment = this.frequency;
     this.waveLength = waveLength;
-    this.amplitude = 800;
+    this.amplitude = 300;
     this.color = color;
   }
 
@@ -45,7 +45,7 @@ class Parametric extends Shape {
     this.ctx.moveTo(this.x + this.sin(100), this.y + this.cos(100));
     this.ctx.lineTo(this.x + this.cos(200), this.y + this.cos(200));
     this.ctx.strokeStyle = this.color;
-    this.ctx.lineWidth = 5;
+    this.ctx.lineWidth = 2;
     this.ctx.stroke();
   }
 
