@@ -25,13 +25,6 @@ class Parametric extends Shape {
     this.color = color;
   }
 
-  private randomCosSin(randomInt: number): number {
-    const internalSum = randomInt * this.waveLength + this.increment;
-    return Math.random() > 0.5
-      ? Math.sin(internalSum) * this.waveLength
-      : Math.cos(internalSum) * this.waveLength;
-  }
-
   private sin = (i: number): number => {
     return Math.sin(i * this.waveLength + this.increment) * this.amplitude;
   };
@@ -49,9 +42,54 @@ class Parametric extends Shape {
     this.ctx.stroke();
   }
 
-  update(): void {
-    this.increment += this.frequency;
+  private draw2(): void {
+    this.ctx.beginPath();
+    this.ctx.moveTo(
+      this.x / 2 + this.sin(200) / 2,
+      this.y * 1.5 + this.cos(200) / 2
+    );
+    this.ctx.lineTo(
+      this.x / 2 + this.cos(200) / 2,
+      this.y * 1.5 + this.cos(100) / 2
+    );
+    this.ctx.strokeStyle = this.color;
+    this.ctx.stroke();
+  }
 
+  private draw3(): void {
+    this.ctx.beginPath();
+    this.ctx.moveTo(
+      this.x / 2 + this.cos(100) / 2,
+      this.y / 2 + this.cos(100) / 2
+    );
+    this.ctx.lineTo(
+      this.x / 2 + this.cos(200) / 2,
+      this.y / 2 + this.sin(200) / 2
+    );
+    this.ctx.strokeStyle = this.color;
+    this.ctx.stroke();
+  }
+
+  private effect2(): void {
+    this.ctx.beginPath();
+    this.ctx.moveTo(
+      this.x * 1.5 + this.cos(200) / 2,
+      this.y + this.sin(100) / 2
+    );
+    this.ctx.lineTo(
+      this.x * 1.5 + this.sin(100) / 2,
+      this.y + this.cos(100) / 2
+    );
+    this.ctx.strokeStyle = this.color;
+    this.ctx.stroke();
+  }
+
+  update(color?: string): void {
+    this.increment += this.frequency;
+    this.color = color ?? color;
+    this.effect2();
+    this.draw2();
+    this.draw3();
     this.draw();
   }
 }
